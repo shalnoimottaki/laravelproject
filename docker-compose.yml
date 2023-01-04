@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  laravelprojects:
+    image: laravelprojects
+    build:
+      context: .
+      dockerfile: ./Dockerfile
