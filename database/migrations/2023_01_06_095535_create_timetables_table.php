@@ -13,9 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('profile_img')
-                  ->default('no_image_1212991001.png');
+        Schema::create('timetables', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->string('timetable');
+            $table->foreignId('userID')
+                  ->constrained('users')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
         });
     }
 
@@ -26,8 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('timetables');
     }
 };

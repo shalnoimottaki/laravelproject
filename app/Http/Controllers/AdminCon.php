@@ -33,6 +33,10 @@ class AdminCon extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'numeric', 'digits:10'],
             'birthday' => ['required', 'date'],
+            'roll' => ['required', 'digits:8','numeric', 'unique:users'],
+            'academic_years' => ['required','numeric'],
+            'CNIE' => ['required','string','size:7', 'unique:users'],
+            'place_of_increase' => ['required','string','max:255']
         ]);
         $user = new User();
         $user->name= $request->name;
@@ -41,9 +45,15 @@ class AdminCon extends Controller
         $user->phone= $request->phone;
         $user->birthday= $request->birthday;
         $user->sector= $request->sector;
-        $user->password= Hash::make($request->name.'2022');
+        $user->roll= $request->roll;
+        $user->blood= $request->blood;
+        $user->academic_years= $request->academic_years;
+        $user->gender= $request->gender;
+        $user->CNIE= $request->CNIE;
+        $user->place_of_increase= $request->place_of_increase;
+        $user->password= Hash::make($request->CNIE.'_2022');
         $user->save();
-        return redirect()->back()->with('Success','the Student has been Added!');
+        return redirect()->back()->with('success','the Student has been Added!');
     }
 
     /**
@@ -70,10 +80,14 @@ class AdminCon extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'fname' => ['required', 'string', 'max:255'],
-            // 'email' => ['required', 'string', 'email', 'max:255','unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'phone' => ['required', 'numeric', 'digits:10'],
             'birthday' => ['required', 'date'],
-            // 'password' => ['required', 'string', 'min:8', 'confirmed']
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'roll' => ['required', 'digits:8','numeric'],
+            'academic_years' => ['required','numeric'],
+            'CNIE' => ['required','string','size:7'],
+            'place_of_increase' => ['required','string','max:255']
         ]);
         $user = User::find($request->id);
         if ($user->email==$request->input('email')) {
@@ -82,10 +96,18 @@ class AdminCon extends Controller
             $user->phone= $request->input('phone');
             $user->birthday= $request->input('birthday');
             $user->sector= $request->input('sector');
-            // $user->password= $request->input('password');
+            $user->roll= $request->input('roll');
+            $user->blood= $request->input('blood');
+            $user->academic_years= $request->input('academic_years');
+            $user->gender= $request->input('gender');
+            $user->CNIE= $request->input('CNIE');
+            $user->place_of_increase= $request->input('place_of_increase');
+            $user->password= Hash::make($request->password);
         }else{
             $request->validate([
-                'email' => ['required', 'string', 'email', 'max:255','unique:users']
+                'email' => ['required', 'string', 'email', 'max:255','unique:users'],
+                'CNIE' => ['required','string','size:7', 'unique:users'],
+                'roll' => ['required', 'digits:8','numeric', 'unique:users']
             ]);
             $user->name= $request->name;
             $user->fname= $request->fname;
@@ -93,10 +115,16 @@ class AdminCon extends Controller
             $user->phone= $request->phone;
             $user->birthday= $request->birthday;
             $user->sector= $request->sector;
-            // $user->password =Hash::make($request->password);
+            $user->roll= $request->roll;
+            $user->blood= $request->blood;
+            $user->academic_years= $request->academic_years;
+            $user->gender= $request->gender;
+            $user->CNIE= $request->CNIE;
+            $user->place_of_increase= $request->place_of_increase;
+            $user->password =Hash::make($request->password);
         }
         $user->save();
-        return redirect()->back()->with('Success','the Student has been Edit!');
+        return redirect()->back()->with('success','the Student has been Edit!');
     }
 
     /**
@@ -108,7 +136,7 @@ class AdminCon extends Controller
     public function destroy($id)
     {
         User::destroy($id);
-        return redirect()->back()->with('Success','the Student has been Delete!');
+        return redirect()->back()->with('success','the Student has been Delete!');
     }
     public function delete2($id)
     {

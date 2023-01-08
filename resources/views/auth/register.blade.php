@@ -98,6 +98,20 @@ Sign Up &mdash;please Sign Up
                         @enderror
                     </div>
                 </div>
+                <div class="row mb-3">
+                    <label for="gender" class="col-md-4 col-form-label text-md-end">{{ __('Gender') }}</label>
+                    <div class="col-md-6">
+                        <select id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender">
+                            <option value="Masculine">Masculine</option>
+                            <option value="Feminine">Feminine</option>
+                        </select>
+                        @error('gender')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
 
                 <div class="row mb-3">
                     <label for="sector" class="col-md-4 col-form-label text-md-end">{{ __('Select the Section ') }}</label>

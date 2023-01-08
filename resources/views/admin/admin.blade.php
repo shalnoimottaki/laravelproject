@@ -3,7 +3,19 @@
 Admin &mdash; Welcome
 @endsection
 @section('UserName')
-    MottakiSchool
+<div class="site-logo mr-auto w-25"><a href="/admin">My Admin</a></div>
+@endsection
+@section('nav.user')
+<div class="mx-auto text-center">
+  <nav class="site-navigation position-relative text-right" role="navigation">
+    <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
+      <li><a href="/admin" class="nav-link">Profile</a></li>
+      <li><a href="/admin/notes" class="nav-link">Notes</a></li>
+      <li><a href="/admin/courses" class="nav-link">Courses</a></li>
+      <li><a href="/admin/timetable" class="nav-link">Timetable</a></li>
+    </ul>
+  </nav>
+</div>
 @endsection
 @section('content')
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
@@ -13,12 +25,12 @@ Admin &mdash; Welcome
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
-    body {
+    /* body {
         color: #566787;
 		background: #f5f5f5;
 		font-family: 'Varela Round', sans-serif;
 		font-size: 13px;
-	}
+	} */
 	.table-responsive {
         margin: 30px 0;
     }
@@ -242,6 +254,7 @@ Admin &mdash; Welcome
 		font-weight: normal;
 	}
 </style>
+
 <script>
 $(document).ready(function(){
 	// Activate tooltip
@@ -267,19 +280,19 @@ $(document).ready(function(){
 	});
 });
 </script>
-@if ($errors->any())
-        <div class="alert alert-danger" style="margin-top: 50px">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+		@if ($errors->any())
+			<div class="alert alert-danger" style="margin-top: 50px">
+				<ul>
+					@foreach ($errors->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+			</div>
         @endif
         @if (session('success'))
             <div class="alert alert-success">
                 <ul>
-                        <li>{{session('success')}}</li>
+                    <li>{{session('success')}}</li>
                 </ul>
             </div>
         @endif
@@ -293,8 +306,8 @@ $(document).ready(function(){
 							<h2>Manage <b>Students</b></h2>
 						</div>
 						<div class="col-xs-6">
-							<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Student</span></a>
-							<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>
+							<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal" title="Add New"><i class="material-icons">&#xE147;</i> <span>Add New Student</span></a>
+							{{-- <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a> --}}
 						</div>
 					</div>
 				</div>
@@ -310,6 +323,7 @@ $(document).ready(function(){
 							<th>Name</th>
 							<th>FamillyName</th>
 							<th>Birthday</th>
+							<th>Gender</th>
 							<th>Phone</th>
 							<th>Section</th>
 							<th>Email</th>
@@ -327,6 +341,7 @@ $(document).ready(function(){
 							<td>{{ $etudiant->name }}</td>
 							<td>{{ $etudiant->fname }}</td>
 							<td>{{ $etudiant->birthday }}</td>
+							<td>{{ $etudiant->gender }}</td>
 							<td>{{ $etudiant->phone }}</td>
 							<td>{{ $etudiant->sector }}</td>
 							<td>{{ $etudiant->email }}</td>
@@ -340,7 +355,7 @@ $(document).ready(function(){
 					</tbody>
 				</table>
 				<div class="clearfix">
-					<div class="hint-text"> Showing <b>5</b> out of <b>{{$etudiants->total()}} </b> entries</div>
+					<div class="hint-text"> Showing <b>{{$etudiants->total()}} out of <b> 5</b> </b> entries</div>
 					@if (isset($etudiants) && $etudiants->lastPage() > 1)
                         <ul class="pagination">
                             <?php
@@ -410,19 +425,35 @@ $(document).ready(function(){
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
+							<i class="bi bi-people-fill"></i>
 							<label>Name</label>
 							<input type="text" name="name" class="form-control" required>
 						</div>
 						<div class="form-group">
+							<i class="bi bi-people-fill"></i>
 							<label>Familly Name</label>
 							<input type="text" name="fname" class="form-control" required>
 						</div>
+						<div class="form-group">
+							<i class="bi bi-credit-card-2-back"></i>
+							<label>CNIE</label>
+							<input type="text" name="CNIE" class="form-control" required>
+						</div>
                         <div class="form-group">
+							<i class="bi bi-calendar-date"></i>
 							<label>Birthday</label>
 							<input type="date" name="birthday" class="form-control" required>
 						</div>
 						<div class="form-group">
+							<i class="bi bi-geo-alt-fill"></i>
+							<label>Place of increase</label>
+							<input type="text" name="place_of_increase" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<i class="bi bi-book-half"></i>
+							<label>Section</label>
 							<select id="sector" name="sector" type="text" class="form-control" required autocomplete="sector">
+                                <option hidden></option>
                                 <option value="Computer Engineering">Computer Engineering</option>
                                 <option value="Industrial">Industrial</option>
                                 <option value="Electrical Engineering">Electrical Engineering</option>
@@ -431,12 +462,44 @@ $(document).ready(function(){
                             </select>
 						</div>
 						<div class="form-group">
+							<i class="bi bi-gender-ambiguous"></i>
+							<label>Gender</label>
+							<select id="gender" name="gender" type="text" class="form-control" required autocomplete="gender">
+								<option hidden></option>
+								<option value="Masculine">Masculine</option>
+								<option value="Feminine">Feminine</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<i class="bi bi-telephone-fill"></i>
 							<label>Phone</label>
 							<input type="text" name="phone" class="form-control" required>
 						</div>
 						<div class="form-group">
+							<i class="bi bi-envelope-fill"></i>
 							<label>Email</label>
 							<input type="email" name="email" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<i class="bi bi-person-badge"></i>
+							<label>Roll</label>
+							<input type="text" name="roll" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<i class="bi bi-calendar2-check"></i>
+							<label>Academic Year</label>
+							<input type="text" name="academic_years" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<i class="bi bi-activity"></i>
+							<label>Blood</label>
+							<select id="blood" name="blood" type="text" class="form-control" required autocomplete="blood">
+                                <option hidden></option>
+								<option value="Groupe A">Groupe A</option>
+                                <option value="Group B">Group B</option>
+                                <option value="Group AB">Group AB</option>
+                                <option value="Group O">Group O</option>
+                            </select>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -461,19 +524,35 @@ $(document).ready(function(){
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
+							<i class="bi bi-people-fill"></i>
 							<label>Name</label>
 							<input type="text" name="name" id="name" class="form-control" required>
 						</div>
 						<div class="form-group">
+							<i class="bi bi-people-fill"></i>
 							<label>Familly Name</label>
 							<input type="text" name="fname" id="fname" class="form-control" required>
 						</div>
+						<div class="form-group">
+							<i class="bi bi-credit-card-2-back"></i>
+							<label>CNIE</label>
+							<input type="text" id="CNIE" name="CNIE" class="form-control" required>
+						</div>
                         <div class="form-group">
+							<i class="bi bi-calendar-date"></i>
 							<label>Birthday</label>
 							<input type="date" name="birthday" id="birthday" class="form-control" required>
 						</div>
 						<div class="form-group">
+							<i class="bi bi-geo-alt-fill"></i>
+							<label>Place of increase</label>
+							<input type="text" id="place_of_increase" name="place_of_increase" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<i class="bi bi-book-half"></i>
+							<label>Section</label>
 							<select id="sector" name="sector" type="text" class="form-control" required autocomplete="sector">
+								<option hidden>{{ $etudiant->sector }}</option>
                                 <option value="Computer Engineering">Computer Engineering</option>
                                 <option value="Industrial">Industrial</option>
                                 <option value="Electrical Engineering">Electrical Engineering</option>
@@ -482,12 +561,54 @@ $(document).ready(function(){
                             </select>
 						</div>
 						<div class="form-group">
+							<i class="bi bi-gender-ambiguous"></i>
+							<label>Gender</label>
+							<select id="gender" name="gender" type="text" class="form-control" required autocomplete="gender">
+								<option hidden>{{ $etudiant->gender }}</option>
+								<option value="Masculine">Masculine</option>
+								<option value="Feminine">Feminine</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<i class="bi bi-telephone-fill"></i>
 							<label>Phone</label>
 							<input type="text" name="phone" id="phone" class="form-control" required>
 						</div>
 						<div class="form-group">
+							<i class="bi bi-envelope-fill"></i>
 							<label>Email</label>
 							<input type="email" name="email" id="email" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<i class="bi bi-person-badge"></i>
+							<label>Roll</label>
+							<input type="text" id="roll" name="roll" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<i class="bi bi-calendar2-check"></i>
+							<label>Academic Year</label>
+							<input type="text" id="academic_years" name="academic_years" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<i class="bi bi-activity"></i>
+							<label>Blood</label>
+							<select id="blood" name="blood" type="text" class="form-control" required autocomplete="blood">
+								<option hidden>{{ $etudiant->blood }}</option>
+                                <option value="Groupe A">Groupe A</option>
+                                <option value="Group B">Group B</option>
+                                <option value="Group AB">Group AB</option>
+                                <option value="Group O">Group O</option>
+                            </select>
+						</div>
+						<div class="form-group">
+							<i class="bi bi-shield-lock-fill"></i>
+							<label>New Password</label>
+							<input id="password" type="password" name="password" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<i class="bi bi-shield-lock-fill"></i>
+							<label>Confirm Password</label>
+							<input id="password-confirm" type="password" name="password_confirmation" class="form-control" required>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -528,10 +649,16 @@ $(document).ready(function(){
             $.get('/admin/' + id ,function(response){
                 $('#name').val(response.name);
                 $('#fname').val(response.fname);
+                $('#CNIE').val(response.CNIE);
                 $('#email').val(response.email);
                 $('#phone').val(response.phone);
                 $('#sector').val(response.sector);
                 $('#birthday').val(response.birthday);
+                $('#place_of_increase').val(response.place_of_increase);
+                $('#gender').val(response.gender);
+                $('#roll').val(response.roll);
+                $('#academic_years').val(response.academic_years);
+                $('#blood').val(response.blood);
                 $('#id').val(response.id);
             });
         }
@@ -540,5 +667,8 @@ $(document).ready(function(){
             $('#deleteEmployeeModal').modal('toggle');
             $('#deleteStudentForm').attr('action',"/admin/" + id);
         }
+
+		// option vide
+		$('option:not([value])').attr('selected', 'selected');
     </script>
 @endsection

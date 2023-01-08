@@ -20,11 +20,15 @@ class StudentCon extends Controller
             'phone' => ['required', 'numeric', 'digits:10'],
             'birthday' => ['required', 'date'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'profile_img' => ['image', 'mimes:jpg,jpeg,png,bmp,gif,svg', 'max:2048'],
+            'roll' => ['required', 'digits:8','numeric'],
+            'academic_years' => ['required','numeric'],
+            'CNIE' => ['required','string','size:7'],
+            'place_of_increase' => ['required','string','max:255'],
+            // 'profile_img' => 'required|image|mimes:png,jpg,jpeg|max:2048'
         ]);
-        $imageName=time().'.'.$request->profile_img->extension();
-        $request->profile_img->storeAs('profile_image',$imageName,'public');
-
+        // $imageName=time().'.'.$request->profile_img->getClientOriginalExtension();
+        // $request->profile_img->storeAs('profile_image',$imageName,'public');
+         
         $user = Auth::user();
 
         $user->name= $request->name;
@@ -33,11 +37,36 @@ class StudentCon extends Controller
         $user->phone= $request->phone;
         $user->birthday= $request->birthday;
         $user->sector= $request->sector;
+        $user->roll= $request->roll;
+        $user->blood= $request->blood;
+        $user->academic_years= $request->academic_years;
+        $user->gender= $request->gender;
+        $user->CNIE= $request->CNIE;
+        $user->place_of_increase= $request->place_of_increase;
         $user->password= Hash::make($request->password);
-        $user->profile_img=$imageName;
+        // $user->profile_img=$imageName;
         $user->save();
-        return redirect()->back()->with('Success','the Student has been Edit!');
+        return redirect()->back()->with('success','the Profile has been Edit!');
     }
+
+
+    public function storeImage(Request $request){
+        $request->validate([
+            'profile_img' => 'required|image|mimes:png,jpg,jpeg|max:2048'
+        ]);
+    
+        $imageName=time().'.'.$request->profile_img->extension();
+        $request->profile_img->storeAs('profile_image',$imageName,'public');
+         
+        $users = Auth::user();
+
+        $users->profile_img=$imageName;
+        $users->save();
+        
+        return redirect()->back()->with('success','Image uploaded Successfully!');
+    }
+
+
     public function pdf(){
         $user = Auth::user();
         view()->share('user',$user);

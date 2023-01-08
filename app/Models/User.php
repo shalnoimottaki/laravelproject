@@ -25,8 +25,16 @@ class User extends Authenticatable
         'birthday',
         'phone',
         'sector',
+        'roll',
+        'academic_years',
+        'gender',
+        'blood',
+        'CNIE',
+        'place_of_increase'
     ];
-    // protected $guard =[ ];
+    // protected $guarded =[ ];
+
+
     /**
      * The attributes that should be hidden for serialization.
      *

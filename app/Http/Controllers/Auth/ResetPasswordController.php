@@ -26,6 +26,6 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'student/profile';
+    protected $redirectTo = '/student/profile';
 
 }

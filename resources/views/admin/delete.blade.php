@@ -3,7 +3,19 @@
 Delete &mdash;Student
 @endsection
 @section('UserName')
-    MottakiSchool
+<div class="site-logo mr-auto w-25"><a href="/admin">My Admin</a></div>
+@endsection
+@section('nav.user')
+<div class="mx-auto text-center">
+  <nav class="site-navigation position-relative text-right" role="navigation">
+    <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
+      <li><a href="/admin" class="nav-link">Profile</a></li>
+      <li><a href="/admin/notes" class="nav-link">Notes</a></li>
+      <li><a href="/admin/courses" class="nav-link">Courses</a></li>
+      <li><a href="/admin/timetable" class="nav-link">Timetable</a></li>
+    </ul>
+  </nav>
+</div>
 @endsection
 @section('content')
 <style>

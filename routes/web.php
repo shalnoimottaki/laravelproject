@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\AdminCon;
 use App\Http\Controllers\NotesCon;
+use App\Http\Controllers\StudentCon;
+use App\Http\Controllers\StudentCourses;
+use App\Http\Controllers\StudentNotes;
+use App\Http\Controllers\StudentTimetable;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -74,20 +78,29 @@ Route::fallback(function(){
 // });
 
 Route::group(['prefix'=>'student','as'=>'student.','middleware'=>['auth','isStudent']],function () {
-    Route::get('profile','StudentCon@show')->name('profile');
-    Route::put('update','StudentCon@update')->name('update');
-    Route::get('/notes',[NotesCon::class,'index'])->name('notes');
+    Route::get('profile',[StudentCon::class, 'show'])->name('profile');
+    Route::put('update',[StudentCon::class, 'update'])->name('update');
+    Route::get('notes', [StudentNotes::class, 'index'])->name('notes');
+    Route::get('courses', [StudentCourses::class, 'index'])->name('courses');
+    Route::get('timetable',[StudentTimetable::class, 'index'])->name('timetable');
     Route::view('/login','student.login')->name('login');
     Route::view('sign','student.sign')->name('sign');
-    Route::get('pdf','StudentCon@pdf')->name('pdf');
+    Route::get('pdf',[StudentCon::class, 'pdf'])->name('pdf');
+    Route::put('/upload-image', [StudentCon::class, 'storeImage'])->name('image.store');
+});
+Route::group(['prefix'=>'admin','middleware'=>['auth','isAdmin']],function () {
+    Route::view('notes','admin.admin-notes')->name('notes');
+    Route::view('courses','admin.admin-courses')->name('courses');
+    Route::view('timetable','admin.admin-timetable')->name('admin_timetable');
 });
 
 Route::resource('admin', AdminCon::class)->except([
     'create','edit','update'
 ])->middleware(['auth','isAdmin']);
 
-Route::put('admin', 'AdminCon@update' )->name('admin.update');
-Route::delete('admin/delete2/{id}', 'AdminCon@delete2' )->name('admin.delete2');
+
+Route::put('admin', [AdminCon::class, 'update'] )->name('admin.update');
+// Route::delete('admin/delete2/{id}', 'AdminCon@delete2' )->name('admin.delete2');
 
 // Route::get('/admin/delete/{id}',function($id){
 //     return view('admin.delete',['id'=> $id]);
@@ -97,5 +110,8 @@ Route::delete('admin/delete2/{id}', 'AdminCon@delete2' )->name('admin.delete2');
 // Route::view('/mottaki','student.mottaki');
 
 
-
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('config:cache');
+    return 'DONE'; //Return anything
+});
 
