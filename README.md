@@ -1,2 +1,2 @@
-# school_project_with_laravel
-mini project about the school with laravel 8
+# School_project_with_laravel
+Mini project about the school with laravel 8
