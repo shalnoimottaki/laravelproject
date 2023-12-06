@@ -551,23 +551,27 @@ $(document).ready(function(){
 						<div class="form-group">
 							<i class="bi bi-book-half"></i>
 							<label>Section</label>
-							<select id="sector" name="sector" type="text" class="form-control" required autocomplete="sector">
-								<option hidden>{{ $etudiant->sector }}</option>
-                                <option value="Computer Engineering">Computer Engineering</option>
-                                <option value="Industrial">Industrial</option>
-                                <option value="Electrical Engineering">Electrical Engineering</option>
-                                <option value="Mechanical Engineering">Mechanical Engineering</option>
-                                <option value="Mathematical Genius">Mathematical Engineering</option>
-                            </select>
+                            @foreach ($etudiants as $etudiant)
+    							<select id="sector" name="sector" type="text" class="form-control" required autocomplete="sector">
+    								<option hidden>{{ $etudiant->sector }}</option>
+                                    <option value="Computer Engineering">Computer Engineering</option>
+                                    <option value="Industrial">Industrial</option>
+                                    <option value="Electrical Engineering">Electrical Engineering</option>
+                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                    <option value="Mathematical Genius">Mathematical Engineering</option>
+                                </select>
+                            @endforeach
 						</div>
 						<div class="form-group">
 							<i class="bi bi-gender-ambiguous"></i>
 							<label>Gender</label>
-							<select id="gender" name="gender" type="text" class="form-control" required autocomplete="gender">
-								<option hidden>{{ $etudiant->gender }}</option>
-								<option value="Masculine">Masculine</option>
-								<option value="Feminine">Feminine</option>
-							</select>
+                            @foreach ($etudiants as $etudiant)
+    							<select id="gender" name="gender" type="text" class="form-control" required autocomplete="gender">
+    								<option hidden>{{ $etudiant->gender }}</option>
+    								<option value="Masculine">Masculine</option>
+    								<option value="Feminine">Feminine</option>
+    							</select>
+                            @endforeach
 						</div>
 						<div class="form-group">
 							<i class="bi bi-telephone-fill"></i>
@@ -592,13 +596,15 @@ $(document).ready(function(){
 						<div class="form-group">
 							<i class="bi bi-activity"></i>
 							<label>Blood</label>
-							<select id="blood" name="blood" type="text" class="form-control" required autocomplete="blood">
-								<option hidden>{{ $etudiant->blood }}</option>
-                                <option value="Groupe A">Groupe A</option>
-                                <option value="Group B">Group B</option>
-                                <option value="Group AB">Group AB</option>
-                                <option value="Group O">Group O</option>
-                            </select>
+                            @foreach ($etudiants as $etudiant)
+    							<select id="blood" name="blood" type="text" class="form-control" required autocomplete="blood">
+    								<option hidden>{{ $etudiant->blood }}</option>
+                                    <option value="Groupe A">Groupe A</option>
+                                    <option value="Group B">Group B</option>
+                                    <option value="Group AB">Group AB</option>
+                                    <option value="Group O">Group O</option>
+                                </select>
+                            @endforeach
 						</div>
 						<div class="form-group">
 							<i class="bi bi-shield-lock-fill"></i>
