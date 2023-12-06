@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Auth;
 // the functions use: get , post , put , delete , patch , options
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/', function () {
     return view('welcome');
@@ -77,13 +77,15 @@ Route::fallback(function(){
 //     return ['name'=>'anas','age'=>'21'];
 // });
 
+Route::view('/login','auth.login')->name('login');
+
 Route::group(['prefix'=>'student','as'=>'student.','middleware'=>['auth','isStudent']],function () {
     Route::get('profile',[StudentCon::class, 'show'])->name('profile');
     Route::put('update',[StudentCon::class, 'update'])->name('update');
     Route::get('notes', [StudentNotes::class, 'index'])->name('notes');
     Route::get('courses', [StudentCourses::class, 'index'])->name('courses');
     Route::get('timetable',[StudentTimetable::class, 'index'])->name('timetable');
-    Route::view('/login','student.login')->name('login');
+    // Route::view('/login','student.login')->name('login');
     Route::view('sign','student.sign')->name('sign');
     Route::get('pdf',[StudentCon::class, 'pdf'])->name('pdf');
     Route::put('/upload-image', [StudentCon::class, 'storeImage'])->name('image.store');
