@@ -15,7 +15,7 @@ class AdminCon extends Controller
      */
     public function index()
     {
-        $etudiants = User::where('isAdmin','=',true)->paginate(5);
+        $etudiants = User::where('isAdmin','!=',true)->paginate(5);
         return view('admin.admin',['etudiants'=>$etudiants]);
     }
 
