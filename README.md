@@ -66,6 +66,14 @@ php artisan serve
 
 - This is the updated code of admin.
 
+## Added 
+- For upload and retrieve image in my Laravel project
+
+```php
+php artisan storage:link
+```
+  
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
