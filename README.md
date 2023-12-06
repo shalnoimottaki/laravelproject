@@ -9,13 +9,13 @@
 
 ## Home Page
 
-![school project with laravel 9](screenshoot/admin-page.PNG)
+![school project with laravel 9](screenshoot/school-laravel.PNG)
 
 ## Admin Page
 
-![school project with laravel 9](screenshoot/school-laravel.PNG)
+![school project with laravel 9](screenshoot/admin-page.PNG)
 
-## User Page
+## Student Page
 
 ![school project with laravel 9](screenshoot/student-page.PNG)
 
