@@ -31,7 +31,7 @@ git clone https://github.com/shalnoimottaki/school_project_with_laravel.git
 - Go into folder
 
 ```php
-cd laravel-10-adminlte
+cd school_project_with_laravel-master
 ```
 
 - After the installation you have to update the vendor folder you can update the vendor folder using this command.
