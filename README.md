@@ -25,7 +25,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 - For Install you have to clone this repo or you can fire this command as well.
 
 ```php
-git clone https://github.com/Nihirz/laravel-10-adminlte.git
+git clone shalnoimottaki/school_project_with_laravel
 ```
 
 - Go into folder
