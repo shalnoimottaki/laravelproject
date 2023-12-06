@@ -6,9 +6,18 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
-# Home Page
+
+## Home Page
 
 ![school project with laravel 9](screenshoot/admin-page.PNG)
+
+## Admin Page
+
+![school project with laravel 9](screenshoot/school-laravel.PNG)
+
+## User Page
+
+![school project with laravel 9](screenshoot/student-page.PNG)
 
 ## About Laravel
 
