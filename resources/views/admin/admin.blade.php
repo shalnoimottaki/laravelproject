@@ -3,27 +3,25 @@
 Admin &mdash; Welcome
 @endsection
 @section('UserName')
-<div class="site-logo mr-auto w-25"><a href="/admin">My Admin</a></div>
+<div class="site-logo mr-auto w-25"><a href="/admin">Welcome Admin</a></div>
 @endsection
 @section('nav.user')
-<div class="mx-auto text-center">
-  <nav class="site-navigation position-relative text-right" role="navigation">
-    <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
-      <li><a href="/admin" class="nav-link">Profile</a></li>
-      <li><a href="/admin/notes" class="nav-link">Notes</a></li>
-      <li><a href="/admin/courses" class="nav-link">Courses</a></li>
-      <li><a href="/admin/timetable" class="nav-link">Timetable</a></li>
-    </ul>
-  </nav>
-</div>
+	<div class="mx-auto text-center">
+		<nav class="site-navigation position-relative text-right" role="navigation">
+			<ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
+				<li><a href="/admin" class="nav-link">Profile</a></li>
+				<li><a href="/admin/notes" class="nav-link">Notes</a></li>
+				<li><a href="/admin/courses" class="nav-link">Courses</a></li>
+				<li><a href="/admin/timetable" class="nav-link">Timetable</a></li>
+			</ul>
+		</nav>
+	</div>
 @endsection
 @section('content')
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <style>
     /* body {
         color: #566787;
@@ -297,17 +295,15 @@ $(document).ready(function(){
             </div>
         @endif
 <div class=" ml-auto" data-aos="fade-up" data-aos-delay="500">
-    {{-- <div class="container"> --}}
 		<div class="table-responsive">
 			<div class="table-wrapper">
 				<div class="table-title">
 					<div class="row">
-						<div class="col-xs-6">
+						<div class="col-xs-6 col-md-9">
 							<h2>Manage <b>Students</b></h2>
 						</div>
-						<div class="col-xs-6">
-							<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal" title="Add New"><i class="material-icons">&#xE147;</i> <span>Add New Student</span></a>
-							{{-- <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a> --}}
+						<div class="col-xs-6 col-md-3">
+							<a href="#addEmployeeModal" class="btn btn-success " data-toggle="modal" title="Add New"><i class="material-icons">&#xE147;</i> <span>Add New Student</span></a>
 						</div>
 					</div>
 				</div>
@@ -327,6 +323,7 @@ $(document).ready(function(){
 							<th>Phone</th>
 							<th>Section</th>
 							<th>Email</th>
+							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -411,7 +408,6 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
-    {{-- </div> --}}
 </div>
 	<!-- Add Modal HTML -->
 	<div id="addEmployeeModal" class="modal fade">
@@ -503,7 +499,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+						<input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel">
 						<input type="submit" class="btn btn-success" value="Add">
 					</div>
 				</form>
@@ -511,8 +507,8 @@ $(document).ready(function(){
 		</div>
 	</div>
 	<!-- Edit Modal HTML -->
-	<div id="editEmployeeModal" class="modal fade">
-		<div class="modal-dialog">
+	<div id="editEmployeeModal" class="modal fade" >
+		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<form action="{{ Route('admin.update') }}" method="POST" id="editeStudentForm">
                     @csrf
@@ -520,7 +516,9 @@ $(document).ready(function(){
                     <input type="hidden" name="id" id="id">
 					<div class="modal-header">
 						<h4 class="modal-title">Edit Student</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
@@ -551,27 +549,27 @@ $(document).ready(function(){
 						<div class="form-group">
 							<i class="bi bi-book-half"></i>
 							<label>Section</label>
-                            @foreach ($etudiants as $etudiant)
-    							<select id="sector" name="sector" type="text" class="form-control" required autocomplete="sector">
-    								<option hidden>{{ $etudiant->sector }}</option>
-                                    <option value="Computer Engineering">Computer Engineering</option>
-                                    <option value="Industrial">Industrial</option>
-                                    <option value="Electrical Engineering">Electrical Engineering</option>
-                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
-                                    <option value="Mathematical Genius">Mathematical Engineering</option>
-                                </select>
-                            @endforeach
+							@foreach ($etudiants as $etudiant)
+								<select id="sector" name="sector" type="text" class="form-control" required autocomplete="sector">
+									<option hidden>{{ $etudiant->sector }}</option>
+									<option value="Computer Engineering">Computer Engineering</option>
+									<option value="Industrial">Industrial</option>
+									<option value="Electrical Engineering">Electrical Engineering</option>
+									<option value="Mechanical Engineering">Mechanical Engineering</option>
+									<option value="Mathematical Genius">Mathematical Engineering</option>
+								</select>
+							@endforeach
 						</div>
 						<div class="form-group">
 							<i class="bi bi-gender-ambiguous"></i>
 							<label>Gender</label>
-                            @foreach ($etudiants as $etudiant)
-    							<select id="gender" name="gender" type="text" class="form-control" required autocomplete="gender">
-    								<option hidden>{{ $etudiant->gender }}</option>
-    								<option value="Masculine">Masculine</option>
-    								<option value="Feminine">Feminine</option>
-    							</select>
-                            @endforeach
+							@foreach ($etudiants as $etudiant)
+								<select id="gender" name="gender" type="text" class="form-control" required autocomplete="gender">
+									<option hidden>{{ $etudiant->gender }}</option>
+									<option value="Masculine">Masculine</option>
+									<option value="Feminine">Feminine</option>
+								</select>
+							@endforeach
 						</div>
 						<div class="form-group">
 							<i class="bi bi-telephone-fill"></i>
@@ -596,15 +594,15 @@ $(document).ready(function(){
 						<div class="form-group">
 							<i class="bi bi-activity"></i>
 							<label>Blood</label>
-                            @foreach ($etudiants as $etudiant)
-    							<select id="blood" name="blood" type="text" class="form-control" required autocomplete="blood">
-    								<option hidden>{{ $etudiant->blood }}</option>
-                                    <option value="Groupe A">Groupe A</option>
-                                    <option value="Group B">Group B</option>
-                                    <option value="Group AB">Group AB</option>
-                                    <option value="Group O">Group O</option>
-                                </select>
-                            @endforeach
+							@foreach ($etudiants as $etudiant)
+								<select id="blood" name="blood" type="text" class="form-control" required autocomplete="blood">
+									<option hidden>{{ $etudiant->blood }}</option>
+									<option value="Groupe A">Groupe A</option>
+									<option value="Group B">Group B</option>
+									<option value="Group AB">Group AB</option>
+									<option value="Group O">Group O</option>
+								</select>
+							@endforeach
 						</div>
 						<div class="form-group">
 							<i class="bi bi-shield-lock-fill"></i>
@@ -618,7 +616,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+						<input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel">
 						<input type="submit" class="btn btn-info" value="Save">
 					</div>
 				</form>
@@ -634,14 +632,14 @@ $(document).ready(function(){
                     @method('DELETE')
 					<div class="modal-header">
 						<h4 class="modal-title">Delete Student</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
 					</div>
 					<div class="modal-body">
 						<p>Are you sure you want to delete these Records?</p>
 						<p class="text-warning"><small>This action cannot be undone.</small></p>
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+						<input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel">
 						<input type="submit" class="btn btn-danger" value="Delete">
 					</div>
 				</form>
