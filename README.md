@@ -85,6 +85,18 @@ php artisan serve
 ```php
 php artisan storage:link
 ```
+
+- Added this code inside AuthenticatesUsers.php
+ 
+```php
+  protected function authenticated()
+    {
+        $user = Auth::user();
+        if($user->isAdmin){
+            return redirect()->route('admin.index');
+        }
+        return redirect()->route('student.profile');
+```
   
 
 ## Learning Laravel
