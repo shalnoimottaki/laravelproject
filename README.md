@@ -21,6 +21,51 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
+## Installation & usage
+- For Install you have to clone this repo or you can fire this command as well.
+
+```php
+git clone https://github.com/Nihirz/laravel-10-adminlte.git
+```
+
+- Go into folder
+
+```php
+cd laravel-10-adminlte
+```
+
+- After the installation you have to update the vendor folder you can update the vendor folder using this command.
+
+```php
+composer update
+```
+
+- After the updation you have to create the ```.env``` file via this command.
+
+```php
+cp .env.example .env
+```
+
+- Now you have to generate the product key.
+
+```php
+php artisan key:generate
+```
+
+- Now migrate the tables & seed the database.
+
+```php
+php artisan migrate --seed
+```
+
+- We are done here. Now you have to just serve your project.
+
+```php
+php artisan serve
+```
+
+- This is the updated code of admin.
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
